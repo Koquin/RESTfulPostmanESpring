@@ -2,6 +2,8 @@ package com.Iago.RESTfulPostmanESpring.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 public class Condutor {
     @Id
@@ -11,10 +13,20 @@ public class Condutor {
     private String nome;
     private String cpf;
     private boolean habilitado;
+    private LocalDate dtNasc;
+    private String telefone;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco", referencedColumnName = "id")
     private Endereco endereco;
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public LocalDate getDtNasc() {
+        return dtNasc;
+    }
 
     public Long getId() {
         return id;

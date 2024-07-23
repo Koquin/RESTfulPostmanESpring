@@ -6,11 +6,11 @@ import org.hibernate.annotations.Cascade;
 @Entity
 public class Infracao {
 
-    public Infracao(Long id, Condutor condutor, Veiculo veiculo, String tipoInfracao, String local) {
+    public Infracao(Long id, Condutor condutor, Veiculo veiculo, Enquadramento enquadramento, Local local) {
         this.id = id;
         this.condutor = condutor;
         this.veiculo = veiculo;
-        this.tipoInfracao = tipoInfracao;
+        this.enquadramento = enquadramento;
         this.local = local;
     }
 
@@ -26,8 +26,13 @@ public class Infracao {
     @JoinColumn(name = "Veiculo", referencedColumnName = "id")
     private Veiculo veiculo;
 
-    private String tipoInfracao;
-    private String local;
+    @OneToOne
+    @JoinColumn(name = "Enquadramento", referencedColumnName = "id")
+    private Enquadramento enquadramento;
+
+    @OneToOne
+    @JoinColumn(name = "Local", referencedColumnName = "id")
+    private Local local;
 
     public Long id(){
         return this.id;
@@ -41,11 +46,15 @@ public class Infracao {
         return veiculo;
     }
 
-    public String getTipoInfracao() {
-        return tipoInfracao;
+    public Local getLocal() {
+        return local;
     }
 
-    public String getLocal() {
-        return local;
+    public Enquadramento getEnquadramento() {
+        return enquadramento;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

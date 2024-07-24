@@ -15,10 +15,7 @@ public class Condutor {
     private boolean habilitado;
     private LocalDate dtNasc;
     private String telefone;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco", referencedColumnName = "id")
-    private Endereco endereco;
+    private String endereco;
 
     public String getTelefone() {
         return telefone;
@@ -44,7 +41,7 @@ public class Condutor {
         return habilitado;
     }
 
-    public Endereco getEndereco() {
+    public String getEndereco() {
         return endereco;
     }
 }

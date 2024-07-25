@@ -55,4 +55,20 @@ public class Infracao {
     public Long getId() {
         return id;
     }
+
+    public void setCondutor(Condutor condutor) {
+        this.condutor = condutor;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public void setEnquadramento(Enquadramento enquadramento) {
+        this.enquadramento = enquadramento;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
 }

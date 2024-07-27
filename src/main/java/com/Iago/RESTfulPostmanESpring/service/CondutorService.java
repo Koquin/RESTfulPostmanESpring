@@ -5,30 +5,47 @@ import com.Iago.RESTfulPostmanESpring.repository.*;
 import com.Iago.RESTfulPostmanESpring.model.*;
 import java.util.*;
 import com.Iago.RESTfulPostmanESpring.exception.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CondutorService {
 
     @Autowired
-    private InfracaoRepository infracaoRepository;
+    private CondutorRepository condutorRepository;
 
-    public List<Infracao> getAllInfracoes(){
-        return infracaoRepository.findAll();
+    @Autowired
+    private VeiculoRepository veiculoRepository;
+
+    public List<Condutor> getAllCondutores(){
+        return condutorRepository.findAll();
     }
 
-    public Infracao getInfracaoById(Long id){
-        return infracaoRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException("Infração não encontrada")
+    public Condutor getCondutorById (Long id){
+        return condutorRepository.findById(id).orElseThrow(
+                () -> new DataNotFoundException("Condutor não encontrado")
         );
     }
 
-    public Infracao saveInfracao(Infracao infracao){
-        return infracaoRepository.save(infracao);
+    public Condutor saveCondutor (Condutor condutor){
+        return condutorRepository.save(condutor);
     }
 
-    public void deleteInfracaoById(Long id){
-        if (!infracaoRepository.existsById(id)){
-            throw new DataNotFoundException("Infracao não encontrada");
+    public void deleteCondutorById(Long id){
+        if (!condutorRepository.existsById(id)) {
+            throw new DataNotFoundException("Condutor não encontrado");
         }
-        infracaoRepository.deleteById(id);
+        condutorRepository.deleteById(id);
     }
+
+    public Condutor getCondutorByPlacaVeiculo(String placa){
+        Condutor condutor = veiculoRepository.findByPlaca(placa).getCondutor();
+        if (condutor == null){
+            throw new DataNotFoundException("Condutor não encontrado");
+        }
+        return condutor;
+    }
+
+
+
+
 }

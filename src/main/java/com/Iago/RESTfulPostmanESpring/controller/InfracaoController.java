@@ -2,6 +2,7 @@ package com.Iago.RESTfulPostmanESpring.controller;
 
 import com.Iago.RESTfulPostmanESpring.exception.DataNotFoundException;
 import com.Iago.RESTfulPostmanESpring.model.Infracao;
+import com.Iago.RESTfulPostmanESpring.service.CondutorService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import com.Iago.RESTfulPostmanESpring.service.InfracaoService;
 import java.util.*;
+import com.Iago.RESTfulPostmanESpring.model.*;
 
 @RestController
 @RequestMapping("/infracoes")
@@ -18,6 +20,9 @@ public class InfracaoController {
 
     @Autowired
     private InfracaoService infracaoService;
+
+    @Autowired
+    private CondutorService condutorService;
 
     @GetMapping
     public ResponseEntity<List<Infracao>> getAllInfracoes(){
@@ -56,4 +61,15 @@ public class InfracaoController {
         infracaoService.saveInfracao(newInfracao);
         return new ResponseEntity<>(newInfracao, HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/placaVeiculo")
+    public ResponseEntity<Condutor> informacoesHabilitado (@RequestParam String placa){
+        Condutor condutorHabilitado = condutorService.getCondutorByPlacaVeiculo(placa);
+        if (condutorHabilitado != null){
+            return new ResponseEntity<>(condutorHabilitado, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
 }

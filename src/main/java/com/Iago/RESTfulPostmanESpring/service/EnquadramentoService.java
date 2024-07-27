@@ -5,7 +5,9 @@ import com.Iago.RESTfulPostmanESpring.repository.*;
 import com.Iago.RESTfulPostmanESpring.model.*;
 import java.util.*;
 import com.Iago.RESTfulPostmanESpring.exception.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EnquadramentoService {
 
     @Autowired

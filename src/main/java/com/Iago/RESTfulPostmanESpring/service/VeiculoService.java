@@ -5,7 +5,9 @@ import com.Iago.RESTfulPostmanESpring.repository.*;
 import com.Iago.RESTfulPostmanESpring.model.*;
 import java.util.*;
 import com.Iago.RESTfulPostmanESpring.exception.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VeiculoService {
 
     @Autowired
@@ -30,5 +32,9 @@ public class VeiculoService {
             throw new DataNotFoundException("Veículo não encontrado");
         }
         veiculoRepository.deleteById(id);
+    }
+
+    public Veiculo getVeiculoByPlaca(String placa){
+        return veiculoRepository.findByPlaca(placa);
     }
 }

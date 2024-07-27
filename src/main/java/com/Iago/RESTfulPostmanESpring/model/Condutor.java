@@ -3,6 +3,7 @@ package com.Iago.RESTfulPostmanESpring.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Condutor {
@@ -16,6 +17,9 @@ public class Condutor {
     private LocalDate dtNasc;
     private String telefone;
     private String endereco;
+
+    @OneToMany(mappedBy = "condutor")
+    private List<Veiculo> veiculos;
 
     public String getTelefone() {
         return telefone;

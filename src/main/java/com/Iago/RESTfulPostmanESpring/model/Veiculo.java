@@ -1,9 +1,6 @@
 package com.Iago.RESTfulPostmanESpring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Veiculo {
@@ -14,11 +11,19 @@ public class Veiculo {
     private String placa;
     private String modelo;
 
+    @ManyToOne
+    @JoinColumn(name = "id_condutor")
+    private Condutor condutor;
+
     public String getPlaca() {
         return placa;
     }
 
     public String getModelo() {
         return modelo;
+    }
+
+    public Condutor getCondutor() {
+        return condutor;
     }
 }

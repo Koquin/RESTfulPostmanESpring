@@ -15,6 +15,9 @@ public class Veiculo {
     @JoinColumn(name = "id_condutor")
     private Condutor condutor;
 
+    public Long getId() { return id; }
+
+
     public String getPlaca() {
         return placa;
     }

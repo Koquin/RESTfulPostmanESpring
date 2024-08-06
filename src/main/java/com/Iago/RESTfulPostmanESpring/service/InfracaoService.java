@@ -17,7 +17,13 @@ public class InfracaoService {
     private InfracaoRepository infracaoRepository;
 
     @Autowired
+    private CondutorRepository condutorRepository;
+
+    @Autowired
     private VeiculoRepository veiculoRepository;
+
+    @Autowired
+    private EnquadramentoRepository enquadramentoRepository;
 
     public List<Infracao> getAllInfracoes() {
         return infracaoRepository.findAll();
@@ -30,6 +36,28 @@ public class InfracaoService {
     }
 
     public Infracao saveInfracao(Infracao infracao) {
+        // Verificar e carregar entidades associadas, se necessário
+        if (infracao.getCondutor() != null) {
+            Long condutorId = infracao.getCondutor().getId();
+            if (condutorId != null) {
+                Condutor condutorExistente = condutorRepository.findById(condutorId).orElse(null);
+                infracao.setCondutor(condutorExistente);
+            }
+        }
+        if (infracao.getVeiculo() != null) {
+            Long veiculoId = infracao.getVeiculo().getId();
+            if (veiculoId != null) {
+                Veiculo veiculoExistente = veiculoRepository.findById(veiculoId).orElse(null);
+                infracao.setVeiculo(veiculoExistente);
+            }
+        }
+        if (infracao.getEnquadramento() != null) {
+            Long enquadramentoId = infracao.getEnquadramento().getId();
+            if (enquadramentoId != null) {
+                Enquadramento enquadramentoExistente = enquadramentoRepository.findById(enquadramentoId).orElse(null);
+                infracao.setEnquadramento(enquadramentoExistente);
+            }
+        }
         return infracaoRepository.save(infracao);
     }
 

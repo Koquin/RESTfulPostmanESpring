@@ -19,15 +19,15 @@ public class Infracao {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Condutor", referencedColumnName = "id")
+    @JoinColumn(name = "id_condutor")
     private Condutor condutor;
 
     @OneToOne
-    @JoinColumn(name = "Veiculo", referencedColumnName = "id")
+    @JoinColumn(name = "id_veiculo")
     private Veiculo veiculo;
 
     @OneToOne
-    @JoinColumn(name = "Enquadramento", referencedColumnName = "id")
+    @JoinColumn(name = "id_enquadramento")
     private Enquadramento enquadramento;
 
     private String local;
